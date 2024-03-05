@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\StripeController;
 
 
 /*
@@ -44,5 +46,16 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::middleware(['auth', 'customer'])->group(function () {
     // Customer routes go here
-    Route::get('/customer', [CustomerController::class, 'index']);
+    Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
+
+    Route::post('/add-to-cart/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::delete('/remove-from-cart/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::post('/cart/{id}/increase', [CartController::class, 'increaseQuantity'])->name('cart.increase');
+    Route::post('/cart/{id}/reduce', [CartController::class, 'reduceQuantity'])->name('cart.reduce');
+
+    Route::post('/session', [StripeController::class, 'session'])->name('session');
+    Route::get('/success', [StripeController::class, 'success'])->name('success');
+    Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
+
+    Route::get('/myorders', [CustomerController::class, 'orders'])->name('myorders');
 });
