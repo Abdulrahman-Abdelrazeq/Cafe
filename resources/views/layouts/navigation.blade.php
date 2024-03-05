@@ -15,6 +15,15 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    @if(Auth::user()->role === 'admin')
+                        <x-nav-link :href="route('admin.orders')" :active="request()->routeIs('admin.orders')">
+                            {{ __('Orders') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.checks')" :active="request()->routeIs('admin.checks')">
+                            {{ __('Checks') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -70,6 +79,16 @@
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @if(Auth::user()->role === 'admin')
+                <x-responsive-nav-link :href="route('admin.orders')" :active="request()->routeIs('admin.orders')">
+                    {{ __('Orders') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('admin.checks')" :active="request()->routeIs('admin.checks')">
+                    {{ __('Checks') }}
+                </x-responsive-nav-link>
+            @endif
+            
         </div>
 
         <!-- Responsive Settings Options -->

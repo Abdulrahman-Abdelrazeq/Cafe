@@ -40,6 +40,10 @@ require __DIR__.'/auth.php';
 Route::middleware(['auth', 'admin'])->group(function () {
     // Admin routes go here
     Route::get('/admin', [AdminController::class, 'index']);
+    Route::get('/orders', [AdminController::class, 'listOrders'])->name('admin.orders');
+    Route::patch('/orders/{order}', [AdminController::class, 'updateStatus'])->name('orders.update-status');
+    Route::get('/checks', [AdminController::class, 'checks'])->name('admin.checks');
+
 });
 
 Route::middleware(['auth', 'customer'])->group(function () {
