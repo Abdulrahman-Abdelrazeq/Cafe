@@ -34,9 +34,12 @@ Route::get('/auth/{provider}/redirect/',[providerController::class, 'redirect'])
 Route::get('/auth/{provider}/callback/',[providerController::class, 'callback']);
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/home',[HomeController::class,'index'])->middleware('auth')->name('home');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -60,6 +63,16 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource("categories",CategoryController::class);
     //product
     Route::resource("products",ProductController::class);
+
+
+    Route::get('/users', [AdminController::class, 'getusers'])->name("users.index");
+    Route::get('/users/{id}',[AdminController::class,'showuser'])->name("users.show");
+    Route::get('/add/users', [AdminController::class, 'createuser'])->name('users.create');
+    Route::post('/users', [AdminController::class, 'storeuser'])->name('users.store');
+    Route::get('/edit/users/{id}', [AdminController::class,'edituser'])->name('users.edit');
+    Route::patch('/edit/users/{id}', [AdminController::class,'updateuser'])->name("users.update");
+    Route::delete('/users/{id}', [AdminController::class, 'destroyuser'])->name('users.destroy');
+
 
 
 

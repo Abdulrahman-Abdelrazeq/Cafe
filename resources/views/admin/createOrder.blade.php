@@ -9,12 +9,12 @@
         <div class="col-md-8">
             <div class="">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 mb-4">
-                    <h3 class="text-xl">List of Products</h3>
+                    <h3 class="text-xl">List of Drinks</h3>
                     <div class="row my-5">
                         @foreach ($products as $product)
                             <div class="col-md-4">
                                 <div class="card relative mb-3">
-                                    <img src="{{ asset('product/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
+                                    <img src="{{ asset('product/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}" style="height:180px">
                                     <div class="absolute top-2 right-2 rounded bg-blue-500 text-white text-xs p-2">
                                         {{ $product->price }} LE
                                     </div>
@@ -31,15 +31,11 @@
             </div>
         </div>
         <div class="col-md-4">
-            @if ($errors->any())
+            @error ('user_id')
                 <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                    Please select a user
                 </div>
-            @endif
+            @enderror
             <div class="">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 mb-4">
                     <h3 class="text-xl">Cart Details</h3>
@@ -110,7 +106,7 @@
             productDiv.innerHTML = `
                 <div class="flex items-center">
                     <div class="w-1/3">
-                        <img src="${product.image}" alt="${product.name}" class="w-full h-auto rounded" style="height: 30px;">
+                        <img src="${product.image}" alt="${product.name}" class="w-full rounded" style="height: 100px;">
                     </div>
                     <div class="w-2/3">
                         <p class="text-lg font-bold">${product.name}</p>

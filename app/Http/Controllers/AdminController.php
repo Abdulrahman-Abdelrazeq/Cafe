@@ -172,4 +172,76 @@ class AdminController extends Controller
 
         return redirect()->route('admin.orders')->with('status', 'Order created successfully.');
     }
+
+    public function getusers()
+    {
+        $users = User::all();
+        return view('users.index', ['users' => $users]);
+    }
+    public function showuser($id)
+    {
+        $users = user::find($id); //if id wrong return 404page
+        return view('users.show', ['users'=> $users]);
+    }
+
+    public function createuser()
+    {
+
+         return view('users.create');
+    }
+
+    public function storeuser(Request $request)
+    {
+        User::create($request->all());
+
+        return redirect()->route('users.index')->with('success','User added successfuly');
+
+        // $this->validate($request, [
+        //     'Name' => 'reqiured',
+        //     'email' => 'reqiured',
+        // ]);
+
+    }
+
+
+    public function edituser(Request $request , $user)
+    {
+        $user = User::find($request->id);
+        return view('users.edit',['user'=>$user] );
+
+        // return view('admin.edit', [
+        //     'user' => $request->user(),
+        // ]);
+    }
+
+
+     public function updateuser(Request $request, $id )
+    {
+
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+        return redirect()->route('users.index')->with('success','User updated successfully');
+
+    //     $request->user()->fill($request->validated());
+    //      if ($request->user()->isDirty('email')) {
+    //         $request->user()->email_verified_at = null;
+    //     }
+
+    //     $request->user()->save();
+
+    //     return Redirect::route('admin.edit')->with('status', 'user-updated');
+     }
+
+
+
+    public function destroyuser($id , Request $request)
+    {
+        // $this->validate($request , [''=> '']);
+        $user = User::find($id);
+        if ($user) {
+            $user->delete();
+            return redirect()->back()->with('success', 'User deleted successfully.');
+        }
+
+    }
 }

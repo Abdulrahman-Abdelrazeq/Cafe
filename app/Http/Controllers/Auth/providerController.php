@@ -30,7 +30,7 @@ class ProviderController extends Controller
             ],
             [
                 'username' => $socialUser->getNickname(),
-                'name' => User::generatename($socialUser->getName()),
+                'name' => $socialUser->getName(),
                 'email' => $socialUser->getEmail(),
                 'provider_token' => $socialUser->token,
             ]
@@ -40,6 +40,6 @@ class ProviderController extends Controller
         Auth::login($user);
 
         // Redirect the user to the dashboard
-        return redirect('/dashboard');
+        return redirect('/home');
     }
 }
