@@ -6,12 +6,21 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
+use App\Models\Order;
+use App\Models\OrderItem;
+
+use Illuminate\Support\Facades\Redirect;
+
+use Illuminate\Support\Facades\Session;
+
 
 class StripeController extends Controller
 {
     
     public function session(Request $request)
     {
+        Session::put('note', $request->note);
+
         $user = auth()->user();
         $productItems = [];
         
@@ -57,11 +66,36 @@ class StripeController extends Controller
 
     public function success()
     {
-        return "Thanks for you order You have just completed your payment.";
+        $cart = Cart::where('user_id', auth()->id())->first();
+        $cartItems = CartItem::where('cart_id', $cart->id)->get();
+        $total_amount = 0;
+        foreach ($cartItems as $item) {
+            $price = $item->product->price;
+            $quantity = $item->quantity;
+            $total = $price * $quantity;
+            $total_amount += $total;
+        }
+        Order::create([
+            'user_id'=> auth()->user()->id,
+            'total_amount'=> $total_amount,
+            'notes'=> session('note'),
+        ]);
+        $order = Order::where('user_id', auth()->id())->latest('id')->first();
+        foreach ($cartItems as $item) {
+            OrderItem::create([
+                'order_id'=> $order->id,
+                'product_id'=> $item->product->id,
+                'quantity'=> $item->quantity,
+            ]);
+            $item->delete();
+        }
+        
+        
+        return redirect()->route('home')->with('message','The order was processed successfully');
     }
 
     public function cancel()
     {
-        return "cancel";
+        return redirect()->route('home')->with('message','You canceled the order');
     }
 }

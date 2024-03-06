@@ -37,9 +37,9 @@ class CartController extends Controller
         // dd($item);
         $item->delete();
 
-        $cart = Cart::where('user_id', auth()->id())->first();
-        $items = CartItem::where('cart_id', $cart->id)->get();
-        $products = Product::paginate(4);
+        // $cart = Cart::where('user_id', auth()->id())->first();
+        // $items = CartItem::where('cart_id', $cart->id)->get();
+        // $products = Product::paginate(4);
         return redirect()->back();
     }
 

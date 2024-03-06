@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\OrderController;
 
 
 /*
@@ -57,5 +58,7 @@ Route::middleware(['auth', 'customer'])->group(function () {
     Route::get('/success', [StripeController::class, 'success'])->name('success');
     Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
 
-    Route::get('/myorders', [CustomerController::class, 'orders'])->name('myorders');
+    Route::get('/myorders', [OrderController::class, 'index'])->name('myorders');
+    Route::get('/orders/between-dates', [OrderController::class, 'showOrdersBetweenDates'])->name('orders.betweenDates');
+    Route::delete('/remove_order/{id}', [OrderController::class, 'remove_order'])->name('order.remove');
 });

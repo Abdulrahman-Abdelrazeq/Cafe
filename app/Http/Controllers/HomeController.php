@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
+use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -15,7 +17,7 @@ class HomeController extends Controller
 
 
 
-    public function index(){
+    public function index(Request $request){
 
         if(Auth::id()){
 
@@ -30,14 +32,27 @@ class HomeController extends Controller
                 }
                 $cart = Cart::where('user_id', auth()->id())->first();
                 $items = CartItem::where('cart_id', $cart->id)->get();
-                $products = Product::paginate(8);
+
+                $order = Order::where('user_id', auth()->id())->latest('id')->first();
+                if($order){
+                    $order_items = OrderItem::where('order_id', $order->id)->paginate(4);
+                }
+
+                $query = $request->input('query');
+
+                // Perform the search query
+                if($query){
+                    $products = Product::where('name', 'like', "%$query%")->paginate(8);
+                }else {
+                    $products = Product::paginate(8);
+                }
                 
                 // return $totalPrice;
                 $totalPrice = 0;
                 foreach ($items as $item) {
                     $totalPrice += $item->quantity * $item->product->price;
                 }
-                return view('customer.index', ['items' => $items, 'products' => $products, 'totalPrice' => $totalPrice]);
+                return view('customer.index', ['items' => $items, 'products' => $products, 'totalPrice' => $totalPrice, 'order_items' => $order_items ?? null]);
             }
             else if($userType == 'admin'){
                 return view('admin.index');
