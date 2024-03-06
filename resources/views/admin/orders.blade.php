@@ -101,7 +101,7 @@
                                                     <div class="col-3">
                                                         <div class="mb-2 relative text-center">
                                                             <div class="rounded-circle overflow-hidden mx-auto" style="width: 150px; height: 150px;">
-                                                                <img src="{{ asset('products/' . $item->product->image) }}" alt="{{ $item->product->name }}" class="w-100 h-100 object-cover" style="object-fit: cover;">
+                                                                <img src="{{ asset('product/' . $item->product->image) }}" alt="{{ $item->product->name }}" class="w-100 h-100 object-cover" style="object-fit: cover;">
                                                             </div>
                                                             
                                                             <!-- Circle for Price -->

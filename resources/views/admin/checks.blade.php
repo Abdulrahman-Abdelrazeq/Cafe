@@ -74,8 +74,7 @@
                                                                     <th style="width: 200px;">Notes</th> 
                                                                     <th>Order Total</th>
                                                                     <th>Status</th>
-                                                                    <th>Transaction ID</th>
-                                                                    <th>Payment Method</th>
+
                                                                 </tr>
                                                             </thead>
                                                             <tr>
@@ -85,11 +84,9 @@
                                                                 <td>{{ $order->notes }}</td>
                                                                 <td>{{ $order->total_amount }} LE</td>
                                                                 <td class="{{ getStatusColorClass($order->status) }}">{{ $order->status }}</td>
-                                                                <td>{{ $order->payment->transaction_id }}</td>
-                                                                <td>{{ $order->payment->method }}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td colspan="8">
+                                                                <td colspan="6">
                                                                     <p>
                                                                         <a class="text-primary" data-bs-toggle="collapse" href="#orderDetails{{ $order->id }}" role="button" aria-expanded="false" aria-controls="orderDetails{{ $order->id }}">
                                                                             View Order Items
@@ -102,7 +99,7 @@
                                                                                 <div class="col-3">
                                                                                     <div class="mb-2 relative text-center">
                                                                                         <div class="rounded-circle overflow-hidden mx-auto" style="width: 150px; height: 150px;">
-                                                                                            <img src="{{ asset('products/' . $item->product->image) }}" alt="{{ $item->product->name }}" class="w-100 h-100 object-cover" style="object-fit: cover;">
+                                                                                            <img src="{{ asset('product/' . $item->product->image) }}" alt="{{ $item->product->name }}" class="w-100 h-100 object-cover" style="object-fit: cover;">
                                                                                         </div>
                                                                                         
                                                                                         <!-- Circle for Price -->

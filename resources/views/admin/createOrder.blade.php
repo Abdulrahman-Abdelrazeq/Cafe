@@ -14,14 +14,14 @@
                         @foreach ($products as $product)
                             <div class="col-md-4">
                                 <div class="card relative mb-3">
-                                    <img src="{{ asset('products/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
+                                    <img src="{{ asset('product/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
                                     <div class="absolute top-2 right-2 rounded bg-blue-500 text-white text-xs p-2">
                                         {{ $product->price }} LE
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $product->name }}</h5>
                                         <p class="card-text">{{ $product->category->name }}</p>
-                                        <button type="button" class="bg-green-500 hover:bg-green-700 text-white text-sm px-4 py-2 rounded-full mt-3" onclick="addToCart({{ $product->id }}, '{{ $product->name }}', {{ $product->price }}, '{{ asset('products/' . $product->image) }}')">Add to Cart</button>
+                                        <button type="button" class="bg-green-500 hover:bg-green-700 text-white text-sm px-4 py-2 rounded-full mt-3" onclick="addToCart({{ $product->id }}, '{{ $product->name }}', {{ $product->price }}, '{{ asset('product/' . $product->image) }}')">Add to Cart</button>
                                     </div>
                                 </div>
                             </div>
