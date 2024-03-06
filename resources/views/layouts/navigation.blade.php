@@ -23,6 +23,9 @@
                         <x-nav-link :href="route('admin.checks')" :active="request()->routeIs('admin.checks')">
                             {{ __('Checks') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('admin.createOrder')" :active="request()->routeIs('admin.createOrder')">
+                            {{ __('Manual Order') }}
+                        </x-nav-link>
                     @endif
                 </div>
             </div>
@@ -86,6 +89,10 @@
 
                 <x-responsive-nav-link :href="route('admin.checks')" :active="request()->routeIs('admin.checks')">
                     {{ __('Checks') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('admin.createOrder')" :active="request()->routeIs('admin.createOrder')">
+                    {{ __('Manual Order') }}
                 </x-responsive-nav-link>
             @endif
             

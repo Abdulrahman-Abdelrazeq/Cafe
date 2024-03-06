@@ -43,6 +43,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/orders', [AdminController::class, 'listOrders'])->name('admin.orders');
     Route::patch('/orders/{order}', [AdminController::class, 'updateStatus'])->name('orders.update-status');
     Route::get('/checks', [AdminController::class, 'checks'])->name('admin.checks');
+    Route::get('/manual-order', [AdminController::class, 'createOrder'])->name('admin.createOrder');
+    Route::post('/manual-order', [AdminController::class, 'submitOrder'])->name('admin.submitOrder');
+
+
 
 });
 

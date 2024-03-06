@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\OrderItem;
 use App\Models\Payment;
 
@@ -121,5 +122,54 @@ class AdminController extends Controller
     
         return view('admin.checks', compact('usersWithFilteredOrders', 'users'));
     }
+
+    public function createOrder()
+    {
+        $products = Product::all();
+        $users = User::where('role', 'user')->get();
+
+        return view('admin.createOrder', compact('products','users'));
+    }
     
+    public function submitOrder(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'products' => 'required|array',
+            'quantities' => 'required|array',
+            'products.*' => 'exists:products,id', // Ensure that each product exists in the database
+            'quantities.*' => 'integer|min:1', // Ensure that quantities are positive integers
+        ]);
+
+        // Calculate total amount
+        $totalAmount = 0;
+        foreach ($request->input('products') as $productId => $productName) {
+            $quantity = $request->input('quantities.' . $productId, 1);
+            $product = Product::find($productId); // Assuming you have a Product model
+
+            $totalAmount += $product->price * $quantity;
+        }
+
+        // Create a new order
+        $order = Order::create([
+            'user_id' => $request->input('user_id'),
+            'total_amount' => $totalAmount,
+            // Add other order details as needed
+        ]);
+
+        // Attach order items to the order
+        foreach ($request->input('products') as $productId => $productName) {
+            $quantity = $request->input('quantities.' . $productId, 1);
+
+            OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $productId,
+                'quantity' => $quantity,
+                // Add other order item details as needed
+            ]);
+        }
+
+        return redirect()->route('admin.orders')->with('status', 'Order created successfully.');
+    }
 }
