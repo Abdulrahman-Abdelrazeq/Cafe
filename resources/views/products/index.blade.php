@@ -59,7 +59,7 @@
 
         <td>
             <img style="width: 70px" src="{{asset('product/'.$product['image'])}}">
-            {{$product["image"]}}
+            
         </td>
         <td><a href="{{route('products.show',$product['id'])}}" class="btn btn-primary">show</a></td>
         <td>

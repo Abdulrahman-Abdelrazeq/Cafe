@@ -22,14 +22,14 @@
   <div class="row mb-3 ">
     <label for="exampleInputEmail1" class="form-label">Name</label>
     <input type="text" class="form-control form-control-lg" name="name"
-      :value="old('name', $user->name)" >
+      value="{{old('name')??$user->name }}" >
 @error('Name')
 <p class="text-danger"> {{$message}}</p>
 @enderror
 </div>
   <div class="row mb-3">
     <label for="exampleInputEmail1" class="form-label">Email</label>
-    <input  class="form-control form-control-lg" :value="old('email', $user->email)"
+    <input  class="form-control form-control-lg" value="{{old('email')??$user->email }}"
    name="email"></input>
    @error('Email')
 <p class="text-danger"> {{$message}}</p>
@@ -38,7 +38,7 @@
 <div class="row mb-3">
     <label for="exampleInputPassword1" class="form-label">Password</label>
     <input type="Password" class="form-control form-control-lg"
-      :value="old('password', $user->password)" name="password">
+       name="password">
     @error('Password')
 <p class="text-danger"> {{$message}}</p>
 @enderror

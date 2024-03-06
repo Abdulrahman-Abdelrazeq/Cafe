@@ -13,15 +13,22 @@
     <style>
         body {
             font-family: 'Figtree', sans-serif;
-            background-color: #f7fafc;
-            color: #1a202c;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1542181961-9590d0c79dab?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+            background-size: cover;
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
             text-align: center;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
         h1 {
@@ -36,13 +43,6 @@
             line-height: 1.5;
             color: #4a5568;
             margin-bottom: 2rem;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
         .actions {
@@ -104,8 +104,6 @@
 
         <h1>Welcome to Our Cafe Website</h1>
         <p>Start ordering now</p>
-        <img src="https://plus.unsplash.com/premium_photo-1663932464735-e0946d833749?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
-        
         <div class="actions">
             <!-- Add any additional actions or buttons here -->
         </div>
