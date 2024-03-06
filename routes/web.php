@@ -9,8 +9,14 @@ use App\Http\Controllers\Auth\providerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
+
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\StripeController;
+use App\Http\Controllers\OrderController;
+
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+
 
 
 
@@ -80,6 +86,19 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::middleware(['auth', 'customer'])->group(function () {
     // Customer routes go here
-    Route::get('/customer', [CustomerController::class, 'index']);
+    Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
+
+    Route::post('/add-to-cart/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::delete('/remove-from-cart/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::post('/cart/{id}/increase', [CartController::class, 'increaseQuantity'])->name('cart.increase');
+    Route::post('/cart/{id}/reduce', [CartController::class, 'reduceQuantity'])->name('cart.reduce');
+
+    Route::post('/session', [StripeController::class, 'session'])->name('session');
+    Route::get('/success', [StripeController::class, 'success'])->name('success');
+    Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
+
+    Route::get('/myorders', [OrderController::class, 'index'])->name('myorders');
+    Route::get('/orders/between-dates', [OrderController::class, 'showOrdersBetweenDates'])->name('orders.betweenDates');
+    Route::delete('/remove_order/{id}', [OrderController::class, 'remove_order'])->name('order.remove');
 });
 
