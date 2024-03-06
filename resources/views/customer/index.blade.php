@@ -117,10 +117,11 @@
                     </div>
                     <div class="d-flex flex-column justify-content-between">
                         <div class="products-list row py-3">
+                            @if ($order_items)
                             @foreach ($order_items as $item)
                             <div class="prdct col-3  text-light mb-3">
                                 <div class="rounded-3 bg-warning position-relative overflow-hidden">
-                                    <img class="top" src="{{ asset('images/'.$item->product->image) }}" style="height: 190px; width: 100%;">
+                                    <img class="top" src="{{ asset('product/'.$item->product->image) }}" style="height: 190px; width: 100%;">
                                     <h1 class="fs-2 text-center py-2">{{$item->product->name}}</h1>
                                     <div class="price bg-warning text-center">{{$item->product->price}} LE</div>
                                     <form action="{{ route('cart.add', $item->product->id) }}" method="POST">
@@ -130,17 +131,20 @@
                                 </div>
                             </div>
                             @endforeach
+                            @endif
                         </div>
                         {{ $products->links('pagination::bootstrap-5', ['route' => 'products']) }}
                     </div>
                 </div>
                 <hr>
+                <h1 class="fs-3 my-3">Products List</h1>
                 <div class="d-flex flex-column justify-content-between" style="min-height: 630px">
+            
                     <div class="products-list row py-4">
                         @foreach ($products as $product)
                         <div class="prdct col-3  text-light mb-3">
                             <div class="rounded-3 bg-warning position-relative overflow-hidden">
-                                <img class="top" src="{{ asset('images/'.$product->image) }}" style="height: 190px; width: 100%;">
+                                <img class="top" src="{{ asset('product/'.$product->image) }}" style="height: 190px; width: 100%;">
                                 <h1 class="fs-2 text-center py-2">{{$product->name}}</h1>
                                 <div class="price bg-warning text-center">{{$product->price}} LE</div>
                                 <form action="{{ route('cart.add', $product->id) }}" method="POST">

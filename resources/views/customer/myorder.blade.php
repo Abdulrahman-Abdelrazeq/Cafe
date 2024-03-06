@@ -26,6 +26,7 @@
                     <?php
                         $orders_total_amount = 0;
                     ?>
+                    @if ($orders)
                     @foreach ($orders as $order)
                     <?php
                         $orders_total_amount += $order->total_amount;
@@ -63,6 +64,8 @@
                         </td>
                     </tr>
                     @endforeach
+                    
+                    @endif
                 </tbody>
             </table>
             <div class="products-list row py-3" style="min-height: 300px">
@@ -70,8 +73,8 @@
                 @foreach ($order_items as $order_item)
                 <div class="prdct col-3  text-light mb-3">
                     <div class="rounded-3 bg-warning position-relative overflow-hidden">
-                        <img class="top" src="{{ asset('images/'.$order_item->product->image) }}" style="height: 260px; width: 100%;">
-                        <h1 class="fs-2 text-center py-2" style="position: absolute; right: 12px; top: 0; font-size: 86px !important; font-weight: bold;">{{$order_item->quantity}}</h1>
+                        <img class="top" src="{{ asset('product/'.$order_item->product->image) }}" style="height: 260px; width: 100%;">
+                        <h1 class="fs-2 text-center py-2 text-dark" style="position: absolute; right: 12px; top: 0; font-size: 86px !important; font-weight: bold;">{{$order_item->quantity}}</h1>
                         <h1 class="fs-2 text-center py-2">{{$order_item->product->name}}</h1>
                         <div class="price bg-warning text-center">{{$order_item->product->price}} LE</div>
                     </div>
