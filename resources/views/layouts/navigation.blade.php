@@ -21,6 +21,27 @@
                     <x-nav-link :href="route('myorders')" :active="request()->routeIs('myorders')">
                         {{ __('My Orders') }}
                     </x-nav-link>
+
+                    @if(Auth::user()->role === 'admin')
+                        <x-nav-link :href="route('admin.orders')" :active="request()->routeIs('admin.orders')">
+                            {{ __('Orders') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.checks')" :active="request()->routeIs('admin.checks')">
+                            {{ __('Checks') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.createOrder')" :active="request()->routeIs('admin.createOrder')">
+                            {{ __('Manual Order') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+                            {{ __('Categories') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
+                            {{ __('Products') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                            {{ __('Users') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -76,6 +97,32 @@
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @if(Auth::user()->role === 'admin')
+                <x-responsive-nav-link :href="route('admin.orders')" :active="request()->routeIs('admin.orders')">
+                    {{ __('Orders') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('admin.checks')" :active="request()->routeIs('admin.checks')">
+                    {{ __('Checks') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('admin.createOrder')" :active="request()->routeIs('admin.createOrder')">
+                    {{ __('Manual Order') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+                    {{ __('Categories') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
+                    {{ __('Products') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                    {{ __('Users') }}
+                </x-responsive-nav-link>
+            @endif
+            
         </div>
 
         <!-- Responsive Settings Options -->
