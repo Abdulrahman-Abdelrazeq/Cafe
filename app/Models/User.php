@@ -48,6 +48,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+
     public static function generatename($name)
     {
         if($name === null){
@@ -59,4 +60,11 @@ class User extends Authenticatable
         }
         return $name;
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    
 }
