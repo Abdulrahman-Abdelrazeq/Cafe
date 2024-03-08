@@ -59,6 +59,12 @@
     font-size: 15px;
 }
 
+.toast-error {
+    background-color: rgba(255, 0, 0, 0.778) !important;
+}
+.toast-success {
+    background-color: rgba(0, 128, 0, 0.706) !important;
+}
 
 .toast-title {
     font-size: 20px; /* Adjust the font size as needed */

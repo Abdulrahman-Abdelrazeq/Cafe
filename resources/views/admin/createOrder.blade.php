@@ -14,7 +14,7 @@
                         @foreach ($products as $product)
                             <div class="col-md-4">
                                 <div class="card relative mb-3">
-                                    <img src="{{ asset('product/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}" style="height:180px">
+                                    <img src="{{ asset('product/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}" style="height:250px">
                                     <div class="absolute top-2 right-2 rounded bg-blue-500 text-white text-xs p-2">
                                         {{ $product->price }} LE
                                     </div>

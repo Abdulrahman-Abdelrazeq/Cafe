@@ -7,7 +7,7 @@
     <div class="py-12">
         <div class="customer-home container mx-auto d-flex gap-3">
             <div class="order p-6 bg-white rounded-3 shadow">
-                <div class="orders overflow-y-auto" style="height: 520px;">
+                <div class="orders overflow-y-auto" style="height: 400px;">
                     <table class="table table-striped text-center">
                         <thead>
                           <tr>
@@ -91,7 +91,7 @@
                         "progressBar" : true,
                         "closeButton" : true,
                     }
-                    toastr.error("{{ session('message') }}", 'Rejected!');
+                    toastr.error("{{ session('message') }}", 'Rejected!', { timeOut: 100000 });
                 </script>
                 @elseif(session('message') == 'The order was processed successfully')
                 <script>
@@ -133,7 +133,7 @@
                             @endforeach
                             @endif
                         </div>
-                        {{ $products->links('pagination::bootstrap-5', ['route' => 'products']) }}
+                        {{-- {{ $products->links('pagination::bootstrap-5', ['route' => 'products']) }} --}}
                     </div>
                 </div>
                 <hr>
