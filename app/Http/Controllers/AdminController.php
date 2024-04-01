@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers;
 
+
+
+use App\Http\Requests\AdminUpdateRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\OrderItem;
 use App\Models\Payment;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.index');
+        $users = user::all();
+        return view('admin.index', ['users' => $users]);
     }
-
     public function listOrders(Request $request)
     {
         // Start with a base query including relationships
@@ -244,4 +249,5 @@ class AdminController extends Controller
         }
 
     }
+
 }
